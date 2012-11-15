@@ -2,20 +2,12 @@ package com.newrog.shooter;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
-import com.badlogic.gdx.scenes.scene2d.ui.Touchpad.TouchpadStyle;
 
 public class Player extends Actor{
 	private Texture texture;
@@ -50,53 +42,41 @@ public class Player extends Actor{
 	@Override
 	public void draw (SpriteBatch batch, float parentAlpha) {
 		this.toFront();
-		//super.draw(batch, parentAlpha);
 		sprite.setPosition(getX()-getWidth()/2, getY()-getHeight()/2);
 		sprite.setRotation(getRotation());
 		sprite.draw(batch);
-		
 		prop.render(batch, this);
-		
-		//if(input.isKeyPressed(Input.Keys.SPACE)) {
-		//	shoot();
-		//}
-		
 		++shootDelay;
-	}
-	
-	public void render(SpriteBatch batch) {
-	
+		
+		float delta = Gdx.graphics.getDeltaTime();
+		if(input.isKeyPressed(Input.Keys.SPACE)) {
+			this.shoot();
+		}
 		if(input.isKeyPressed(Input.Keys.A)) {
-			this.translate(-2, 0);
+			this.translate(-300*delta, 0);
 		}
 		if(input.isKeyPressed(Input.Keys.D)) {
-			this.translate(2, 0);
+			this.translate(300*delta, 0);
 		}
 		if(input.isKeyPressed(Input.Keys.W)) {
-			this.translate(0, 2);
+			this.translate(0, 300*delta);
 		}
 		if(input.isKeyPressed(Input.Keys.S)) {
-			this.translate(0, -2);
+			this.translate(0, -300*delta);
 		}
-	
 		if(input.isKeyPressed(Input.Keys.LEFT)) {
-			this.rotate(5);
+			this.rotate(200*delta);
 		}
 		if(input.isKeyPressed(Input.Keys.RIGHT)) {
-			this.rotate(-5);
+			this.rotate(-200*delta);
 		}
 		
-		
-		++shootDelay;
-			
-
-	  //setPosition(getX(), getY());
-		sprite.setPosition(getX()-getWidth()/2, getY()-getHeight()/2);
-		sprite.setRotation(getRotation());
-		sprite.draw(batch);
-		
-		prop.render(batch, this);
+		if(input.isKeyPressed(Input.Keys.B)) {
+			game.gameScreen.stage.addActor(new Enemy(game));
+		}
 	}
+	
+
 	public void shoot() {
 		if(shootDelay>10) {
 			game.gameScreen.stage.addActor(new Bullet(game, getRotation(), getX(), getY()));

@@ -2,10 +2,8 @@ package com.newrog.shooter;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -27,11 +25,6 @@ public class GameScreen implements Screen{
 		
 		fps = new FPSLogger();
 		stage.setViewport(853, 853*Gdx.graphics.getHeight()/Gdx.graphics.getWidth(), true);
-		//OrthographicCamera c = new OrthographicCamera(stage.getWidth(),stage.getHeight());
-		//c.setToOrtho(true);
-		//c.zoom = 1f;
-		//c.translate(stage.getWidth()/2, stage.getHeight()/2);
-		//stage.setCamera(c);
 		
 		p = new Player(game);
 		p.setPosition(stage.getWidth()/2, stage.getHeight()/2);
@@ -54,7 +47,7 @@ public class GameScreen implements Screen{
 	@Override
 	public void render(float delta)
 	{
-		update();
+		update(delta);
 		
 		Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
@@ -64,22 +57,17 @@ public class GameScreen implements Screen{
 		
 	}
 	
-	private void update()
+	private void update(float delta)
 	{
 		if(tp.isTouched()) {
-				p.translate(tp.getKnobPercentX()*5, tp.getKnobPercentY()*5);	
+			p.translate(tp.getKnobPercentX()*300*delta, tp.getKnobPercentY()*300*delta);	
 		}
 		if(tp2.isTouched()) {
 			float getR = p.getRotation();
 			p.setRotation(-getR);
 			p.setRotation(MathUtils.radiansToDegrees*MathUtils.atan2(tp2.getKnobPercentY(), tp2.getKnobPercentX()));
 			p.shoot();
-			
-	  }
-		
-			
-		
-				
+		}		
 	}
 
 	@Override

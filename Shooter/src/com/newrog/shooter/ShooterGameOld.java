@@ -4,20 +4,14 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas.TextureAtlasData;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
-import com.badlogic.gdx.scenes.scene2d.ui.Touchpad.TouchpadStyle;
 
 public class ShooterGameOld implements ApplicationListener {
 	private OrthographicCamera camera;
@@ -27,7 +21,7 @@ public class ShooterGameOld implements ApplicationListener {
 
 	public ArrayList<Actor> entities = new ArrayList<Actor>();
 	public ArrayList<Actor> killList = new ArrayList<Actor>();
-public Stage s;
+	public Stage s;
 	@Override
 	public void create()
 	{
@@ -113,7 +107,7 @@ public Stage s;
 		//	}
 	//	}
 
-		player.render(batch);
+		//player.render(batch);
 		s.draw();
 		
 		

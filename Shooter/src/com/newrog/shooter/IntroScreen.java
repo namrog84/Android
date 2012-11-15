@@ -6,7 +6,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
 import com.badlogic.gdx.scenes.scene2d.actions.RemoveActorAction;
@@ -71,8 +70,7 @@ public class IntroScreen implements Screen {
 		stage.draw();
 		stage.act();
 		
-		//10 seconds
-		if(startedTime + 10000 < TimeUtils.millis() || Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+		if(startedTime + 7000 < TimeUtils.millis() || Gdx.input.isTouched()|| Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
 			game.setScreen(game.gameScreen);
 		}
 		

@@ -1,9 +1,9 @@
 package com.newrog.shooter.client;
 
-import com.newrog.shooter.ShooterGameOld;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
+import com.newrog.shooter.ShooterGame;
 
 public class GwtLauncher extends GwtApplication {
 	@Override
@@ -14,6 +14,6 @@ public class GwtLauncher extends GwtApplication {
 
 	@Override
 	public ApplicationListener getApplicationListener () {
-		return new ShooterGameOld();
+		return new ShooterGame();
 	}
 }
