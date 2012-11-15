@@ -6,3 +6,4 @@
 	<entry-point class='com.newrog.shooter.client.GwtLauncher' />
 	<set-configuration-property name="gdx.assetpath" value="../Shooter-android/assets" />
 </module>
+

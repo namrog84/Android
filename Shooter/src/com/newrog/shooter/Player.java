@@ -2,6 +2,7 @@ package com.newrog.shooter;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -9,39 +10,47 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-public class Player extends Actor{
-	private Texture texture;
-	public Sprite sprite;
+public class Player extends Entity{
 	private Input input;
-	private ShooterGame game;
+	private Sprite shadow;
+	
+	
 	public Player(ShooterGame game) {
 		this.game = game;
+		
 		texture = new Texture(Gdx.files.internal("ship.png"));
 		texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
-		
 		TextureRegion region = new TextureRegion(texture, 0, 0, 72, 40);
 		
-		
 		sprite = new Sprite(region);
-				
-		System.out.println(sprite.getWidth() + " " + sprite.getHeight());
-		//sprite.setSize(1f, .1f);
 		sprite.setOrigin(sprite.getWidth()/2, sprite.getHeight()/2);
 		sprite.setPosition(-sprite.getWidth()/2, -sprite.getHeight()/2);
+
+		shadow = new Sprite(region);
+
+		shadow.setPosition(-sprite.getWidth()/3, -sprite.getHeight()/3);
+
+		
 		input = Gdx.input;
 		setHeight(sprite.getHeight());
 		setWidth(sprite.getWidth());
-	//	System.out.println(sprite.getX() + " " + sprite.getY());
+		
 		prop = new Prop();
 	
-	
 	}
+	
 	public Prop prop;
 	private int shootDelay = 0;
-	
+
 	@Override
-	public void draw (SpriteBatch batch, float parentAlpha) {
+	public void render (SpriteBatch batch, float parentAlpha) {
 		this.toFront();
+		
+		shadow.setRotation(getRotation());
+		shadow.setColor(new Color(0.1f,0.1f,0.1f, 0.2f));
+		shadow.setPosition(getX() - sprite.getWidth() / 3, getY() - sprite.getWidth() / 3);
+		shadow.draw(batch);
+		
 		sprite.setPosition(getX()-getWidth()/2, getY()-getHeight()/2);
 		sprite.setRotation(getRotation());
 		sprite.draw(batch);
@@ -71,10 +80,12 @@ public class Player extends Actor{
 			this.rotate(-200*delta);
 		}
 		
-		if(input.isKeyPressed(Input.Keys.B)) {
-			game.gameScreen.stage.addActor(new Enemy(game));
-		}
+		//if(input.isKeyPressed(Input.Keys.B)) {
+		///	game.gameScreen.stage.addActor(new Enemy(game));
+		//	blah = true;
+		//}
 	}
+	boolean blah = false;
 	
 
 	public void shoot() {
@@ -88,5 +99,13 @@ public class Player extends Actor{
 	public void dispose() {
 		texture.dispose();
 	}
+
+	@Override
+	protected void update()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

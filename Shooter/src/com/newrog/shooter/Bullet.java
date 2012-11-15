@@ -47,10 +47,14 @@ public class Bullet extends Actor{
 	public void draw(SpriteBatch batch, float parentAlpha) {
 		
 		this.translate(speed*MathUtils.cosDeg(getRotation()), speed*MathUtils.sinDeg(getRotation()));
-		//setPosition(getX(), getY());
-		sprite.setPosition(getX()-getWidth()/2, getY()-getHeight()/2);
+		
 		sprite.setRotation(getRotation());
+		sprite.setPosition(getX()-getWidth()/2, getY()-getHeight()/2);
 		sprite.draw(batch);
+		
+		if(lifeSpan < 0 ) {
+			this.remove();
+		}
 		--lifeSpan;
 	}
 	ShapeRenderer sr = new ShapeRenderer();

@@ -54,11 +54,17 @@ public class GameScreen implements Screen{
 		stage.draw();
 		stage.act();
 		
-		
+		if(sixty++ > 20) {
+			stage.addActor(new Enemy(game));
+			sixty = 0;
+		}
 	}
+	int sixty = 0;
 	
 	private void update(float delta)
 	{
+		tp.toFront();
+		tp2.toFront();
 		if(tp.isTouched()) {
 			p.translate(tp.getKnobPercentX()*300*delta, tp.getKnobPercentY()*300*delta);	
 		}
@@ -68,6 +74,8 @@ public class GameScreen implements Screen{
 			p.setRotation(MathUtils.radiansToDegrees*MathUtils.atan2(tp2.getKnobPercentY(), tp2.getKnobPercentX()));
 			p.shoot();
 		}		
+		
+		
 	}
 
 	@Override

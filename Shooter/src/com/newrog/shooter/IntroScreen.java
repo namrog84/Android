@@ -61,6 +61,7 @@ public class IntroScreen implements Screen {
 		}
 	}
 
+	
 	@Override
 	public void render(float delta)
 	{
@@ -70,7 +71,7 @@ public class IntroScreen implements Screen {
 		stage.draw();
 		stage.act();
 		
-		if(startedTime + 7000 < TimeUtils.millis() || Gdx.input.isTouched()|| Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+		if(startedTime + 4000 < TimeUtils.millis() || Gdx.input.isTouched()|| Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
 			game.setScreen(game.gameScreen);
 		}
 		
