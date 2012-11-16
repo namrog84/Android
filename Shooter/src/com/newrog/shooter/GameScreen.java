@@ -19,16 +19,20 @@ public class GameScreen implements Screen{
 	private Touchpad tp2;
 	Player p;
 	FPSLogger fps;
+	
 	public GameScreen(ShooterGame game) {
 		this.game = game;
 		stage = new Stage();
 		
 		fps = new FPSLogger();
 		stage.setViewport(853, 853*Gdx.graphics.getHeight()/Gdx.graphics.getWidth(), true);
+		//theArt = new TextureAtlas("arty.txt");
+		
 		
 		p = new Player(game);
 		p.setPosition(stage.getWidth()/2, stage.getHeight()/2);
 		stage.addActor(p);
+		
 		
 		TextureAtlas ta = new TextureAtlas("dataa.txt");
 		Skin stag = new Skin(ta);
@@ -36,10 +40,10 @@ public class GameScreen implements Screen{
 		tps.background = stag.getDrawable("outer");
 		tps.knob = stag.getDrawable("path3769-6");
 		tp = new Touchpad(0, tps);
-		tp.setBounds(50, 50,100, 100);
+		tp.setBounds(50, 50,200, 200);
 		stage.addActor(tp);
 		tp2 = new Touchpad(0, tps);
-		tp2.setBounds(stage.getWidth()-150, 50,100, 100);
+		tp2.setBounds(stage.getWidth()-250, 50,200, 200);
 		stage.addActor(tp2);
 		Gdx.input.setInputProcessor(stage);
 	}
@@ -55,7 +59,10 @@ public class GameScreen implements Screen{
 		stage.act();
 		
 		if(sixty++ > 20) {
-			stage.addActor(new Enemy(game));
+			if(MathUtils.randomBoolean())
+				stage.addActor(new Airplane(game));
+			else
+				stage.addActor(new Cessna(game));
 			sixty = 0;
 		}
 	}
@@ -66,7 +73,7 @@ public class GameScreen implements Screen{
 		tp.toFront();
 		tp2.toFront();
 		if(tp.isTouched()) {
-			p.translate(tp.getKnobPercentX()*300*delta, tp.getKnobPercentY()*300*delta);	
+			p.translate(tp.getKnobPercentX()*150*delta, tp.getKnobPercentY()*150*delta);	
 		}
 		if(tp2.isTouched()) {
 			float getR = p.getRotation();

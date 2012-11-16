@@ -15,7 +15,7 @@ public class MainActivity extends AndroidApplication {
         cfg.useAccelerometer = false;
         cfg.useCompass = false;
   
-        System.out.println("Vajsfsasdasdiahsdf");
+        System.out.println("Vajsfdfsdiahsdf");
         
         initialize(new ShooterGame(), cfg);
 

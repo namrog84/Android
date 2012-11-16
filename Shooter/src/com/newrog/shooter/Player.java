@@ -2,25 +2,25 @@ package com.newrog.shooter;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class Player extends Entity{
 	private Input input;
 	private Sprite shadow;
 	
+	private Sound sound;
 	
 	public Player(ShooterGame game) {
 		this.game = game;
 		
-		texture = new Texture(Gdx.files.internal("ship.png"));
-		texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
-		TextureRegion region = new TextureRegion(texture, 0, 0, 72, 40);
+		//texture = new Texture(Gdx.files.internal("ship.png"));
+		//texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
+		TextureRegion region =game.theArt.findRegion("ship1"); 
+				//new TextureRegion(texture, 0, 0, 72, 40);
 		
 		sprite = new Sprite(region);
 		sprite.setOrigin(sprite.getWidth()/2, sprite.getHeight()/2);
@@ -36,6 +36,7 @@ public class Player extends Entity{
 		setWidth(sprite.getWidth());
 		
 		prop = new Prop();
+		sound = Gdx.audio.newSound(Gdx.files.internal("sound_33.wav"));
 	
 	}
 	
@@ -92,6 +93,7 @@ public class Player extends Entity{
 		if(shootDelay>10) {
 			game.gameScreen.stage.addActor(new Bullet(game, getRotation(), getX(), getY()));
 			shootDelay=0;
+			sound.play(1.0f);
 		}
 
 	}

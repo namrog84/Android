@@ -1,8 +1,6 @@
 package com.newrog.shooter;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -19,10 +17,11 @@ public class Bullet extends Actor{
 	
 	public Bullet(ShooterGame game, float angle, float x, float y) {
 	
-		texture = new Texture(Gdx.files.internal("ship.png"));
-		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		//texture = new Texture(Gdx.files.internal("ship.png"));
+		//texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		TextureRegion region = new TextureRegion(texture, 0, 0, 72, 40);
+		TextureRegion region =game.theArt.findRegion("ship1"); 
+				//new TextureRegion(texture, 0, 0, 72, 40);
 		
 		
 		sprite = new Sprite(region);
@@ -44,6 +43,7 @@ public class Bullet extends Actor{
 	
 	public float speed = 10.0f;
 	
+	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
 		
 		this.translate(speed*MathUtils.cosDeg(getRotation()), speed*MathUtils.sinDeg(getRotation()));
