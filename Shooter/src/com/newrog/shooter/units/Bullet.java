@@ -1,4 +1,4 @@
-package com.newrog.shooter;
+package com.newrog.shooter.units;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.newrog.shooter.ShooterGame;
 
 public class Bullet extends Actor{
 
@@ -26,13 +27,13 @@ public class Bullet extends Actor{
 		
 		sprite = new Sprite(region);
 				
-		sprite.setScale(0.5f);
+		sprite.setScale(.5f);
 		
 		sprite.setOrigin(sprite.getWidth()/2, sprite.getHeight()/2);
 		sprite.setPosition(-sprite.getWidth()/2, -sprite.getHeight()/2);
 	  
 	  //sprite.setColor(Color.RED);
-	  sprite.setColor(1f, 0.3f, 0.3f, 1);
+	  sprite.setColor(0.3f, 0.3f, 1.0f, .5f);
 		setRotation(angle);
 		setPosition(x, y);
 		setSize(sprite.getWidth(), sprite.getHeight());

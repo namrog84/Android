@@ -1,9 +1,11 @@
-package com.newrog.shooter;
+package com.newrog.shooter.units;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.newrog.shooter.ShooterGame;
 
 public abstract class Entity extends Actor{
 
@@ -14,11 +16,12 @@ public abstract class Entity extends Actor{
 	public boolean active = true;
 	
 	public Entity() {
-		
+	 	
 	}
-	
+	protected float delta;
 	@Override
 	public void draw(SpriteBatch batch, float parentalpha) {
+		delta = Gdx.graphics.getDeltaTime();
 		if(active)
 			update();
 		

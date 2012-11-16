@@ -1,4 +1,4 @@
-package com.newrog.shooter;
+package com.newrog.shooter.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -12,6 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.actions.RemoveActorAction;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.newrog.shooter.ShooterGame;
+import com.newrog.shooter.units.Player;
 
 public class IntroScreen implements Screen {
 

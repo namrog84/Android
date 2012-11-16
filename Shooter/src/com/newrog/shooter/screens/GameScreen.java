@@ -1,44 +1,43 @@
-package com.newrog.shooter;
+package com.newrog.shooter.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad.TouchpadStyle;
+import com.newrog.shooter.ShooterGame;
+import com.newrog.shooter.units.Airplane;
+import com.newrog.shooter.units.Player;
 
 public class GameScreen implements Screen{
 
-	Stage stage;
-	ShooterGame game;
-	private Touchpad tp;
-	private Touchpad tp2;
-	Player p;
-	FPSLogger fps;
+	public Stage stage;
+	protected ShooterGame game;
+	public Touchpad tp;
+	public Touchpad tp2;
+	public Player p;
+	protected FPSLogger fps;
+	private int sixty = 0;
 	
 	public GameScreen(ShooterGame game) {
 		this.game = game;
 		stage = new Stage();
-		
 		fps = new FPSLogger();
+		
 		stage.setViewport(853, 853*Gdx.graphics.getHeight()/Gdx.graphics.getWidth(), true);
-		//theArt = new TextureAtlas("arty.txt");
-		
-		
 		p = new Player(game);
 		p.setPosition(stage.getWidth()/2, stage.getHeight()/2);
 		stage.addActor(p);
 		
-		
-		TextureAtlas ta = new TextureAtlas("dataa.txt");
-		Skin stag = new Skin(ta);
+		Skin stag = new Skin(game.theArt);
 		TouchpadStyle tps = new TouchpadStyle();
 		tps.background = stag.getDrawable("outer");
-		tps.knob = stag.getDrawable("path3769-6");
+		tps.knob = stag.getDrawable("pad");
 		tp = new Touchpad(0, tps);
 		tp.setBounds(50, 50,200, 200);
 		stage.addActor(tp);
@@ -51,6 +50,7 @@ public class GameScreen implements Screen{
 	@Override
 	public void render(float delta)
 	{
+		
 		update(delta);
 		
 		Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
@@ -58,15 +58,13 @@ public class GameScreen implements Screen{
 		stage.draw();
 		stage.act();
 		
-		if(sixty++ > 20) {
-			if(MathUtils.randomBoolean())
-				stage.addActor(new Airplane(game));
-			else
-				stage.addActor(new Cessna(game));
+		if (sixty++ > 20 || Gdx.input.isKeyPressed(Input.Keys.B)) {
+			stage.addActor(new Airplane(game));
 			sixty = 0;
 		}
+		fps.log();
 	}
-	int sixty = 0;
+	
 	
 	private void update(float delta)
 	{
