@@ -25,8 +25,8 @@ public class Prop extends Entity {
 	//rewrite prop to integrate with traditional update/render
 	public void render(SpriteBatch batch, Player p) {
 		rotate(20);
-		setPosition(p.getX() + 12 * MathUtils.cosDeg(p.getRotation()),
-					p.getY() + 12 * MathUtils.sinDeg(p.getRotation()));
+		setPosition(p.getCenterX() + 12 * MathUtils.cosDeg(p.getRotation()),
+					p.getCenterY() + 12 * MathUtils.sinDeg(p.getRotation()));
 
 		sprite.setRotation(getRotation());
 		sprite.setPosition(getX() - getWidth() / 2, getY() - getHeight() / 2);
@@ -39,7 +39,7 @@ public class Prop extends Entity {
 	}
 
 	@Override
-	protected void render(SpriteBatch batch, float parentalpha) {
+	protected void render(SpriteBatch batch) {
 		// TODO Auto-generated method stub
 
 	}

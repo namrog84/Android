@@ -1,0 +1,21 @@
+
+packed.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+hate-down
+  rotate: false
+  xy: 1, 1
+  size: 157, 84
+  split: 17, 15, 16, 15
+  orig: 157, 84
+  offset: 0, 0
+  index: -1
+hate
+  rotate: false
+  xy: 160, 1
+  size: 157, 84
+  split: 17, 15, 16, 15
+  orig: 157, 84
+  offset: 0, 0
+  index: -1

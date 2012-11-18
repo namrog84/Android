@@ -9,11 +9,39 @@ plane
   orig: 102, 102
   offset: 1, 5
   index: -1
+Tank_ImgTank
+  rotate: false
+  xy: 102, 349
+  size: 58, 27
+  orig: 62, 31
+  offset: 2, 2
+  index: -1
+Tank_ImgDummyTank
+  rotate: false
+  xy: 228, 324
+  size: 27, 27
+  orig: 31, 31
+  offset: 2, 2
+  index: -1
+Tank_ImgTurret
+  rotate: false
+  xy: 228, 353
+  size: 24, 12
+  orig: 32, 20
+  offset: 4, 4
+  index: -1
 pad
   rotate: false
   xy: 176, 258
   size: 64, 64
   orig: 64, 64
+  offset: 0, 0
+  index: -1
+bullet3
+  rotate: false
+  xy: 242, 258
+  size: 14, 6
+  orig: 14, 6
   offset: 0, 0
   index: -1
 rotor1
@@ -23,6 +51,13 @@ rotor1
   orig: 60, 60
   offset: 0, 0
   index: -1
+missile
+  rotate: false
+  xy: 242, 266
+  size: 10, 8
+  orig: 12, 10
+  offset: 1, 1
+  index: -1
 ship1
   rotate: false
   xy: 102, 258
@@ -30,9 +65,16 @@ ship1
   orig: 72, 40
   offset: 0, 0
   index: -1
+BulletFlash3
+  rotate: false
+  xy: 54, 352
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
 cessna1
   rotate: false
-  xy: 102, 349
+  xy: 0, 352
   size: 52, 64
   orig: 52, 64
   offset: 0, 0

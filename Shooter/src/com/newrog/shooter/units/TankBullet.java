@@ -5,14 +5,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.newrog.shooter.ShooterGame;
 
-public class Bullet extends Ammunition {
+public class TankBullet extends Enemy {
 
 	//public float speed = 10.0f;
-	private int lifeSpan = 100;
+	private int lifeSpan = 150;
 	protected boolean exists = false;
 
-	public Bullet(ShooterGame game, float angle, float x, float y) {
-		super(game, angle, x, y);
+	public TankBullet(ShooterGame game, float angle, float x, float y) {
+		super(game);
 		new Flash(game, x, y);
 		TextureRegion region = game.theArt.findRegion("bullet3");
 		sprite = new Sprite(region);
@@ -28,25 +28,24 @@ public class Bullet extends Ammunition {
 		
 		exists = true;
 		computeVelocity();
-		
+		life = 1;
 	}
 
-	@Override
-	public void dispose() {
-		texture.dispose();
-	}
+
 
 	@Override
 	protected void update() {
 		super.update();
-		
+		if(lifeSpan-- < 0) {
+			life = 0;
+		}
 		//translate(speed * MathUtils.cosDeg(getRotation()), speed * MathUtils.sinDeg(getRotation()));
 	
 	}
 
 
 	@Override
-	protected void render(SpriteBatch batch) {
+	public void render(SpriteBatch batch) {
 
 		if(exists) {
 			sprite.setRotation(getRotation());

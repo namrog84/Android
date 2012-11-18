@@ -1,38 +1,59 @@
 package com.newrog.shooter.units;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.newrog.shooter.ShooterGame;
 
-public class Airplane extends Enemy {
+public class Tank extends Enemy {
 
-	
-	public Airplane(ShooterGame game) {
+	Sprite turret;
+	public Tank(ShooterGame game) {
 		super(game);
 		velo = new Vector2(1, 1);
-		TextureRegion region = game.theArt.findRegion("harrier1");
+		TextureRegion region = game.theArt.findRegion("Tank_ImgDummyTank");
+		TextureRegion region2 = game.theArt.findRegion("Tank_ImgTurret");
 		
 		sprite = new Sprite(region);
 		sprite.flip(true, false);
 		sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
-		shadow = new Sprite(region);
-		shadow.flip(true, false);
-		shadow.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
-		setHeight(.75f*sprite.getHeight());
-		setWidth(.75f*sprite.getWidth());
+		turret = new Sprite(region2);
+		turret.setOrigin(turret.getWidth()/2, turret.getHeight()/2);
+		
+		setHeight(sprite.getHeight());
+		setWidth(sprite.getWidth());
 
 		
-		speedXModifer = 2.5f;
-		speedYModifer = 2.5f;
+		speedXModifer = 1.5f;
+		speedYModifer = 1.5f;
 		life = 2;
 	}
-	
+	private float aimDirection = 0;
+	@Override
+	public void render(SpriteBatch batch) {
+		super.render(batch);
+		//turret.setScale(1, scalarY );
+		turret.setRotation(aimDirection);
+		turret.setPosition(getCenterX() + 6 * MathUtils.cosDeg(aimDirection)-turret.getWidth()/2,
+						   getCenterY() + 6 * MathUtils.sinDeg(aimDirection)-turret.getHeight()/2);
+		//turret.setPosition(getCenterX()-9.5f,
+			//			   getCenterY()-9.5f);
+		
+		
+		turret.draw(batch);
+	}
+	private float shootTime = 0;
 	@Override
 	protected void update() {
 		super.update();
 
+		--shootTime;
+		if(shootTime< 0) {
+			game.gameScreen.entities.add(new TankBullet(game, aimDirection,getCenterX(),getCenterY()));
+			shootTime = MathUtils.random(50f, 500f);
+		}
 		timer1 -= delta * 50;
 
 		if (timer1 < 0)
@@ -73,6 +94,7 @@ public class Airplane extends Enemy {
 		calculateSpeed();
 		setRotation(direction);
 		
+		aimDirection = calculateAngle(game.gameScreen.p.getCenterX(), game.gameScreen.p.getCenterY(), getCenterX(), getCenterY());
 		//System.out.println(getX() + " " + getY() + " " +getWidth() + " " + getHeight());
 	}
 

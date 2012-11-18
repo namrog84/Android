@@ -9,14 +9,17 @@ public class ShooterGame extends Game {
 
 	public IntroScreen introScreen;
 	public GameScreen gameScreen;
-
 	public TextureAtlas theArt;
-
+	
+	public float sound = 1.0f;
+	
 	@Override
 	public void create() {
 		theArt = new TextureAtlas("arty.txt");
 		introScreen = new IntroScreen(this);
 		gameScreen = new GameScreen(this);
+
+		
 		setScreen(introScreen);
 	}
 

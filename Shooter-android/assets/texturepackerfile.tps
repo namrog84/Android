@@ -144,6 +144,7 @@
             <filename>G:/resources/aircraft/plane.png</filename>
             <filename>outer.png</filename>
             <filename>pad.png</filename>
+            <filename>G:/resources/coptra/embeddable_76899/Image/bullet3.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
