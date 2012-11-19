@@ -29,6 +29,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad.TouchpadStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Array;
 import com.newrog.shooter.ShooterGame;
 import com.newrog.shooter.units.Airplane;
 import com.newrog.shooter.units.Ammunition;
@@ -52,6 +53,7 @@ public class GameScreen implements Screen{
 	//public float resolutionScale = 1;
 	public  List<Entity> entities;
 	public OrthographicCamera camera;
+	public Array<Entity> specialEffects;
 	public GameScreen(ShooterGame game) {
 		entities = new ArrayList<Entity>();
 		this.game = game;
@@ -65,7 +67,7 @@ public class GameScreen implements Screen{
 		camera.translate(400, 240);
 		camera.update();
 		//camera = stage.getCamera();
-	
+		specialEffects = new Array<Entity>();
 		batch = new SpriteBatch();
 		batch.setProjectionMatrix(camera.combined);
 		

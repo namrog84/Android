@@ -129,17 +129,7 @@ public class Missile extends Ammunition {
           //  computeVelocity();
         }
         
-      /*  for(_loc_1 in PlayState.enemies)
-        {
-            
-            if (HitTest.complexHitTestObject(this.dummy, _loc_1.dummy, 6))
-            {
-                FlxG.play(this.SndMissileHit, FlxG.volume + 0.2);
-                new MissExp(this.x, this.y, "missile");
-                this._reset();
-                break;
-            }
-        }*/
+
 	}
 
 
@@ -160,9 +150,6 @@ public class Missile extends Ammunition {
 			sprite.setRotation(getRotation());
 			sprite.setPosition(getCenterX() - sprite.getWidth() / 2, getY());
 			sprite.draw(batch);
-			
-		
-		
 			
 		}
 		
