@@ -15,7 +15,9 @@ public class ShooterGame extends Game {
 	
 	@Override
 	public void create() {
+		System.out.println("ART");
 		theArt = new TextureAtlas("arty.txt");
+		System.out.println("ART END");
 		introScreen = new IntroScreen(this);
 		gameScreen = new GameScreen(this);
 

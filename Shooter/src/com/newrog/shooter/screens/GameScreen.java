@@ -1,20 +1,27 @@
 package com.newrog.shooter.screens;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad.TouchpadStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -25,6 +32,7 @@ import com.newrog.shooter.units.Enemy;
 import com.newrog.shooter.units.Entity;
 import com.newrog.shooter.units.Player;
 import com.newrog.shooter.units.Tank;
+import com.newrog.shooter.units.TankBullet;
 
 public class GameScreen implements Screen{
 
@@ -67,12 +75,12 @@ public class GameScreen implements Screen{
 		tps.background = stag.getDrawable("outer");
 		tps.knob = stag.getDrawable("pad");
 		tp = new Touchpad(0, tps);
-		tp.setBounds(50, 50,200, 200);
+		tp.setBounds(20, 20,200, 200);
 		stage.addActor(tp);
 		tp2 = new Touchpad(0, tps);
 		
 		
-		tp2.setBounds(stage.getWidth()-250, 50,200, 200);
+		tp2.setBounds(stage.getWidth()-220, 20,200, 200);
 		stage.addActor(tp2);
 		
 		Skin aa = new Skin(Gdx.files.internal("packed.json"));
@@ -97,11 +105,24 @@ public class GameScreen implements Screen{
 		//buttonMulti.addActor(l);
 		stage.addActor(buttonMulti);
 		
+		background = new Sprite(game.theArt.findRegion("classic_low"));
+		//background.setPosition(0, 44);
 		
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("data/CONSOLA.TTF"));
+		BitmapFont f = generator.generateFont(35);
+		generator.dispose();
+		lab = new Label("0", new LabelStyle(f, Color.WHITE));
+		lab.setPosition(stage.getWidth()/2, stage.getHeight()-40);
+		stage.addActor(lab);
 		
 	}
+	Label lab;
 	public ArrayList<Entity> removeList = new ArrayList<Entity>();
 	SpriteBatch batch;
+	
+	
+	Sprite background;
+	
 	@Override
 	public void render(float delta)
 	{
@@ -110,11 +131,16 @@ public class GameScreen implements Screen{
 		
 		Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-		stage.draw();
+	
 		//stage.act();
 		
 		
 		batch.begin();
+		
+		//background.setScale(scaleX, scaleY);
+		background.draw(batch);
+		
+		
 		for(int i = entities.size()-1; i >= 0; --i) {
 			Entity e = entities.get(i);
 			e.draw(batch);
@@ -122,28 +148,38 @@ public class GameScreen implements Screen{
 			
 			ArrayList<Entity> collider = collided(e);
 			if(collider != null ){
-				
+
 				for(int z = 0; z < collider.size(); ++z) {
-					if(e instanceof Enemy && collider.get(z) instanceof Ammunition) {
+					if(e instanceof Enemy && !(e instanceof TankBullet) && collider.get(z) instanceof Ammunition) {
 						--e.life;
 						--collider.get(z).life;
+						
 					}
 					if(e instanceof Enemy && collider.get(z) instanceof Player) {
 						--e.life;
 						//--collider.get(z).life;
 					}
+					if(e instanceof Player && collider.get(z) instanceof Enemy) {
+						--e.life;
+					}
 				}
 			}
 			
-			if(e.life <= 0)
+			if (e.life <= 0) {
 				removeList.add(e);
+				if (e instanceof Airplane || e instanceof Tank) lab.setText("" + ++killCount);
+
+			}
 		}
 		batch.end();
-		
+		stage.draw();
 		//System.out.println(entities.size());
 		
-		if (sixty++ > 50 || Gdx.input.isKeyPressed(Input.Keys.B)) {
-			entities.add(new Airplane(game));
+		if (sixty++ > 30 || Gdx.input.isKeyPressed(Input.Keys.B)) {
+			if(MathUtils.randomBoolean())
+				entities.add(new Airplane(game));
+			else
+				entities.add(new Tank(game));
 			//stage.addActor(new Airplane(game));
 			sixty = 0;
 		}
@@ -153,6 +189,7 @@ public class GameScreen implements Screen{
 		entities.removeAll(removeList);
 		removeList.clear();
 	}
+	int killCount = 0;
 	
 	
 	private ArrayList<Entity> collided(Entity entity) {
@@ -172,10 +209,6 @@ public class GameScreen implements Screen{
 
 	private void update(float delta)
 	{
-		
-		//for(int i = 0; i < entities.size(); ++i) {
-		//	entities.get(i).draw(batch, 1);
-		//}
 		
 		tp.toFront();
 		tp2.toFront();

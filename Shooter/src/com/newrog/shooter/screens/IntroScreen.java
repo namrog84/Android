@@ -50,44 +50,12 @@ public class IntroScreen implements Screen {
 		game.setScreen(game.gameScreen);
 	}
 
-	
-
 	public long startedTime = 0;
-
-	//public int count = 0;
 	private TextButtonStyle tbss;
 	
-	//ArrayList<Entity> entities;
+
 	public void starter() {
 		
-		//count = stage.getActors().size;
-		/*for (int i = 0; i < 10; ++i)
-		{
-			Player p = new Player(game);
-			p.setPosition(MathUtils.random(10) * 80, MathUtils.random(600, 1200));
-			p.rotate(-90);
-			entities.add(p);
-			//stage.addActor(p);
-			SequenceAction saa = new SequenceAction();
-			ParallelAction pa = new ParallelAction();
-			MoveToAction a = new MoveToAction();
-			a.setPosition(p.getX(), -50);
-			if (MathUtils.random(20) == 1)
-			{
-				RotateToAction rta = new RotateToAction();
-				rta.setRotation(990);
-				rta.setDuration(5);
-				pa.addAction(rta);
-			}
-
-			a.setDuration(MathUtils.random(5, 10));
-			pa.addAction(a);
-			saa.addAction(pa);
-
-			RemoveActorAction raa = new RemoveActorAction();
-			saa.addAction(raa);
-			//p.addAction(saa);
-		}*/
 		
 		
 		window = new Window("Dialog", skin);
@@ -99,6 +67,7 @@ public class IntroScreen implements Screen {
 		
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("data/CONSOLA.TTF"));
 		BitmapFont f = generator.generateFont(55);
+		
 		generator.dispose();
 		l = new Label("PLAY", new LabelStyle(f, Color.WHITE));
 		Skin aa = new Skin(Gdx.files.internal("packed.json"));
@@ -150,21 +119,8 @@ public class IntroScreen implements Screen {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		stage.draw();
 		stage.act();
-		//bring window to front
-		//window.toFront();
 		batch.begin();
-	
-		
-			
-		
-	//	for(Entity e : entities) {
-	//		e.draw(batch, 1);
-	//	}
 		batch.end();
-		if (startedTime + 14000 < TimeUtils.millis())
-		{// || Gdx.input.isTouched()|| Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-			game.setScreen(game.gameScreen);
-		}
 	}
 
 	@Override

@@ -14,7 +14,8 @@ import com.newrog.shooter.ShooterGame;
 public class Player extends Entity {
 	private Sprite shadow;
 
-	private Sound sound;
+	private Sound bulletSound;
+	private Sound missileSound;
 	private int shootDelay = 6;
 
 	public Player(ShooterGame game) {
@@ -32,9 +33,10 @@ public class Player extends Entity {
 		
 		setHeight(sprite.getHeight()/2);
 		setWidth(sprite.getWidth()/4);
-
+		
 		prop = new Prop(game);
-		sound = Gdx.audio.newSound(Gdx.files.internal("sound_33.wav"));
+		bulletSound = Gdx.audio.newSound(Gdx.files.internal("sound_33.wav"));
+		missileSound = Gdx.audio.newSound(Gdx.files.internal("SndMissile_.wav"));
 
 	}
 
@@ -129,6 +131,7 @@ public class Player extends Entity {
 									getCenterY() + 40 * MathUtils.sinDeg(getRotation()-15)
 									)
 						);
+				bulletSound.play(game.sound);
 			}else {
 				game.gameScreen.entities.add(
 						new Missile(game, getRotation(), 
@@ -142,13 +145,11 @@ public class Player extends Entity {
 									getCenterY() + 40 * MathUtils.sinDeg(getRotation()-15)
 									)
 						);
+				missileSound.play(game.sound);
 			}
 			
 			
-			
-
 			shootTimer = 0;
-			sound.play(game.sound);
 		}
 	}
 

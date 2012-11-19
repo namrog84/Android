@@ -33,20 +33,20 @@ public class Enemy extends Entity {
 		sound = Gdx.audio.newSound(Gdx.files.internal("sound_22.wav"));
 		sound2 = Gdx.audio.newSound(Gdx.files.internal("sound_40.wav"));
 		this.game = game;
-		float start = MathUtils.random(0, 1);
-		if (start > 0.75f)
+		float start = MathUtils.random(0, 4);
+		if (start > 3f)
 		{
-			setPosition(game.gameScreen.stage.getWidth() + 10, MathUtils.random(0, game.gameScreen.stage.getHeight()));
-		} else if (start > 0.5f)
+			setPosition(game.gameScreen.stage.getWidth()-50, MathUtils.random(0, game.gameScreen.stage.getHeight()));
+		} else if (start > 2f)
 		{
-			setPosition(-10, MathUtils.random(0, game.gameScreen.stage.getHeight()));
-		} else if (start > 0.25f)
+			setPosition(50, MathUtils.random(0, game.gameScreen.stage.getHeight()));
+		} else if (start > 1f)
 		{
-			setPosition(MathUtils.random(0, game.gameScreen.stage.getWidth()), 0);
+			setPosition(MathUtils.random(0, game.gameScreen.stage.getWidth()), 50);
 		} else
 		{
 			setPosition(MathUtils.random(0, game.gameScreen.stage.getWidth()),
-						MathUtils.random(0, game.gameScreen.stage.getHeight()));
+						   game.gameScreen.stage.getHeight()-50);
 		}
 
 		speed = 900;

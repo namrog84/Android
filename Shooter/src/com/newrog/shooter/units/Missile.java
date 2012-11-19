@@ -1,5 +1,7 @@
 package com.newrog.shooter.units;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -13,21 +15,36 @@ public class Missile extends Ammunition {
 	protected boolean exists = false;
 	protected float counter = 0;
 	private float finDir;
+	Sprite smokeSprite;
+	Animation smoke;
 	
+	TextureRegion[] smokeyTrail;
+	TextureRegion currentFrame;
 	public Missile(ShooterGame game, float angle, float x, float y) {
 		super(game, angle, x, y);
 	
 		TextureRegion region = game.theArt.findRegion("missile");
+		TextureRegion region2 = game.theArt.findRegion("MissileTrail2");
+		TextureRegion[][] tmp = region2.split(64, 28);
+		TextureRegion[] smokeyTrail = new TextureRegion[5];
+		
+		for(int i = 0; i < 5; i++) {
+			smokeyTrail[i] = tmp[0][i];
+		}
+		System.out.println("A " + tmp.length);
+		smoke = new Animation(.15f, smokeyTrail);
 		sprite = new Sprite(region);
 		sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
 		sprite.setPosition(-sprite.getWidth(), -sprite.getHeight() / 2);
-
+		smokeSprite = new Sprite(smoke.getKeyFrame(0));
 		sprite.setColor(0.8f, 0.8f, 0.8f, .99f);
 		setRotation(angle);
 		setPosition(x, y);
 		setSize(sprite.getWidth() / 2, sprite.getHeight());
 		speed = 5f;
 		
+		//smokeSprite = new Sprite(region);
+		//smokeSprite.setOrigin(smokeSprite.getWidth()/2, smokeSprite.getHeight()/2);
 		exists = true;
 		computeVelocity();
 		velo.x = -1 * velo.x / 5;
@@ -87,7 +104,7 @@ public class Missile extends Ammunition {
                 }
                 if (Math.abs(finDir - direction) < 180)
                 {
-                	System.out.println("2");
+                	//System.out.println("2");
                     direction = direction + 2 * (finDir - direction) * 5*delta;
                     
                 }
@@ -126,16 +143,26 @@ public class Missile extends Ammunition {
 	}
 
 
-	
+	 float stateTime = 0 ;
 
 	@Override
 	protected void render(SpriteBatch batch) {
-
+	
 		if(exists) {
 			sprite.setRotation(getRotation());
 			sprite.setPosition(getCenterX() - sprite.getWidth() / 2, getY());
 			sprite.draw(batch);
+			
+			stateTime+= Gdx.graphics.getDeltaTime();
+			currentFrame = smoke.getKeyFrame(stateTime, true);
+
+			smokeSprite.setRegion(currentFrame);
+			smokeSprite.setRotation(getRotation());
+			smokeSprite.setPosition(getCenterX() - sprite.getWidth() / 2, getY());
+			smokeSprite.draw(batch);
+			
 		}
+		
 		
 	}
 	

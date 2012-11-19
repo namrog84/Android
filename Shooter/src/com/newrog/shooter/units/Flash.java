@@ -21,7 +21,6 @@ public class Flash extends Entity{
 		//sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
 		//sprite.setPosition(-sprite.getWidth(), sprite.getHeight());
 		game.gameScreen.entities.add(this);
-		
 	}
 	
 	

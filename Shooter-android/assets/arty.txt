@@ -2,93 +2,107 @@ arty.png
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-plane
+MissileTrail2
   rotate: false
   xy: 0, 258
+  size: 386, 28
+  orig: 396, 28
+  offset: 10, 0
+  index: -1
+plane
+  rotate: false
+  xy: 495, 0
   size: 100, 92
   orig: 102, 102
   offset: 1, 5
   index: -1
 Tank_ImgTank
   rotate: false
-  xy: 102, 349
+  xy: 169, 0
   size: 58, 27
   orig: 62, 31
   offset: 2, 2
   index: -1
 Tank_ImgDummyTank
   rotate: false
-  xy: 228, 324
+  xy: 54, 0
   size: 27, 27
   orig: 31, 31
   offset: 2, 2
   index: -1
 Tank_ImgTurret
   rotate: false
-  xy: 228, 353
+  xy: 28, 0
   size: 24, 12
   orig: 32, 20
   offset: 4, 4
   index: -1
 pad
   rotate: false
-  xy: 176, 258
+  xy: 355, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 bullet3
   rotate: false
-  xy: 242, 258
+  xy: 12, 0
   size: 14, 6
   orig: 14, 6
   offset: 0, 0
   index: -1
 rotor1
   rotate: false
-  xy: 166, 324
+  xy: 229, 0
   size: 60, 60
   orig: 60, 60
   offset: 0, 0
   index: -1
 missile
   rotate: false
-  xy: 242, 266
+  xy: 0, 0
   size: 10, 8
   orig: 12, 10
   offset: 1, 1
   index: -1
 ship1
   rotate: false
-  xy: 102, 258
+  xy: 421, 0
   size: 72, 40
   orig: 72, 40
   offset: 0, 0
   index: -1
 BulletFlash3
   rotate: false
-  xy: 54, 352
+  xy: 83, 0
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
   index: -1
 cessna1
   rotate: false
-  xy: 0, 352
+  xy: 115, 0
   size: 52, 64
   orig: 52, 64
   offset: 0, 0
   index: -1
+classic_low
+  rotate: false
+  xy: 0, 288
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1
 harrier1
   rotate: false
-  xy: 102, 300
+  xy: 291, 0
   size: 62, 47
   orig: 62, 47
   offset: 0, 0
   index: -1
 outer
   rotate: false
-  xy: 0, 0
+  xy: 597, 0
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
