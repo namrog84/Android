@@ -19,7 +19,7 @@ public abstract class Entity {
 	protected ShooterGame game;
 
 	public int life = 1;
-	
+	public int zIndex = 0;
 	public boolean active = true;
 
 	public Rectangle rect = new Rectangle(0,0,15,5);
@@ -41,7 +41,9 @@ public abstract class Entity {
 		computeVelocity();
 	}
 
-
+	
+	
+	
 	//private Vector2 position = new Vector2(0, 0);
 
 

@@ -4,6 +4,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -46,7 +50,7 @@ public class GameScreen implements Screen{
 	protected FPSLogger fps;
 	private int sixty = 0;
 	//public float resolutionScale = 1;
-	public  ArrayList<Entity> entities;
+	public  List<Entity> entities;
 	public OrthographicCamera camera;
 	public GameScreen(ShooterGame game) {
 		entities = new ArrayList<Entity>();
@@ -85,6 +89,7 @@ public class GameScreen implements Screen{
 		
 		Skin aa = new Skin(Gdx.files.internal("packed.json"));
 		Button buttonMulti;
+		Button changeWeaponButton;
 		
 		//buttonMulti = new TextButton("ASFD", tbss);
 		buttonMulti = new Button(aa, "default");
@@ -92,18 +97,30 @@ public class GameScreen implements Screen{
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				p = new Player(gamez);
+				p.setPosition(400, 240);
 				entities.add(p);
 				
 			}
 		});
 	
+		changeWeaponButton = new Button(aa, "default");
+		changeWeaponButton.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				cycleWeapons();
+			}
+		});
+		
 		WidgetGroup w = new WidgetGroup();
 		//buttonMulti.setWidth(window.getWidth()/2);
 		//buttonMulti.setHeight(window.getHeight()/3);
 		buttonMulti.setX(0);
 		buttonMulti.setY(stage.getHeight()-buttonMulti.getHeight());
+		changeWeaponButton.setX(0);
+		changeWeaponButton.setY(stage.getHeight()-2*buttonMulti.getHeight());
 		//buttonMulti.addActor(l);
 		stage.addActor(buttonMulti);
+		stage.addActor(changeWeaponButton);
 		
 		background = new Sprite(game.theArt.findRegion("classic_low"));
 		//background.setPosition(0, 44);
@@ -119,7 +136,10 @@ public class GameScreen implements Screen{
 	Label lab;
 	public ArrayList<Entity> removeList = new ArrayList<Entity>();
 	SpriteBatch batch;
-	
+	public void cycleWeapons () {
+		p.weaponToggle = !p.weaponToggle;
+		
+	}
 	
 	Sprite background;
 	
@@ -188,6 +208,8 @@ public class GameScreen implements Screen{
 		
 		entities.removeAll(removeList);
 		removeList.clear();
+		Collections.sort(entities, new customComparator());
+		
 	}
 	int killCount = 0;
 	
@@ -261,6 +283,17 @@ public class GameScreen implements Screen{
 	public void dispose()
 	{
 		
+	}
+	public class customComparator implements Comparator<Entity>{
+		@Override
+		public int compare(Entity e1, Entity e2) {
+			if(e1.zIndex < e2.zIndex)
+				return 1;
+			if(e1.zIndex > e2.zIndex)
+				return -1;
+			else
+				return 0;
+		}
 	}
 
 }

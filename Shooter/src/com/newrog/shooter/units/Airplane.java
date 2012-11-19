@@ -23,7 +23,7 @@ public class Airplane extends Enemy {
 		setHeight(.75f*sprite.getHeight());
 		setWidth(.75f*sprite.getWidth());
 
-		
+		zIndex = 10; 
 		speedXModifer = 2.5f;
 		speedYModifer = 2.5f;
 		life = 2;

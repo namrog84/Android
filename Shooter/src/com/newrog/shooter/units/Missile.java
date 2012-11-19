@@ -149,17 +149,20 @@ public class Missile extends Ammunition {
 	protected void render(SpriteBatch batch) {
 	
 		if(exists) {
-			sprite.setRotation(getRotation());
-			sprite.setPosition(getCenterX() - sprite.getWidth() / 2, getY());
-			sprite.draw(batch);
-			
 			stateTime+= Gdx.graphics.getDeltaTime();
 			currentFrame = smoke.getKeyFrame(stateTime, true);
 
 			smokeSprite.setRegion(currentFrame);
 			smokeSprite.setRotation(getRotation());
-			smokeSprite.setPosition(getCenterX() - sprite.getWidth() / 2, getY());
+			smokeSprite.setPosition(getX() - smokeSprite.getWidth() / 2, getY()-smokeSprite.getHeight());
 			smokeSprite.draw(batch);
+			
+			sprite.setRotation(getRotation());
+			sprite.setPosition(getCenterX() - sprite.getWidth() / 2, getY());
+			sprite.draw(batch);
+			
+		
+		
 			
 		}
 		

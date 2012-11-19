@@ -29,7 +29,7 @@ public class Player extends Entity {
 		shadow = new Sprite(region);
 
 		shadow.setPosition(-sprite.getWidth() / 3, -sprite.getHeight() / 3);
-
+		zIndex= 20;
 		
 		setHeight(sprite.getHeight()/2);
 		setWidth(sprite.getWidth()/4);
@@ -112,7 +112,7 @@ public class Player extends Entity {
 			this.shoot();
 		}
 	}
-	boolean weaponToggle = true;
+	public boolean weaponToggle = true;
 	boolean blah = false;
 
 	public void shoot() {
