@@ -25,7 +25,7 @@ public abstract class Entity {
 	public Rectangle rect = new Rectangle(0,0,15,5);
 	protected Vector2 velo = new Vector2(0, 0);
 	protected float direction;
-	protected float speed = 1;
+	public float speed = 1;
 	 ShapeRenderer sr = new ShapeRenderer();
 
 		protected float delta;

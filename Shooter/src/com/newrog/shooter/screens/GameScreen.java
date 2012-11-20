@@ -1,5 +1,6 @@
 package com.newrog.shooter.screens;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
@@ -35,12 +36,13 @@ import com.newrog.shooter.units.Airplane;
 import com.newrog.shooter.units.Ammunition;
 import com.newrog.shooter.units.Enemy;
 import com.newrog.shooter.units.Entity;
+import com.newrog.shooter.units.Explosion;
 import com.newrog.shooter.units.Player;
 import com.newrog.shooter.units.Tank;
 import com.newrog.shooter.units.TankBullet;
 
 public class GameScreen implements Screen{
-
+	private Sound expSound;
 	public Stage stage;
 	public ShooterGame game;
 	public ShooterGame gamez;
@@ -74,7 +76,7 @@ public class GameScreen implements Screen{
 		p = new Player(game);
 		p.setPosition(400, 240);
 		entities.add(p);
-
+		expSound = Gdx.audio.newSound(Gdx.files.internal("sound_40.wav"));
 		
 		Skin stag = new Skin(game.theArt);
 		TouchpadStyle tps = new TouchpadStyle();
@@ -175,6 +177,17 @@ public class GameScreen implements Screen{
 					if(e instanceof Enemy && !(e instanceof TankBullet) && collider.get(z) instanceof Ammunition) {
 						--e.life;
 						--collider.get(z).life;
+						expSound.play(game.sound);
+						Explosion ex = new Explosion(game);
+						ex.init(e.getX()+MathUtils.random(-10, 10), e.getY()+MathUtils.random(-10, 10));
+						entities.add(ex);
+						ex = new Explosion(game);
+						ex.init(e.getX()+MathUtils.random(-10, 10), e.getY()+MathUtils.random(-10, 10));
+						entities.add(ex);
+						ex = new Explosion(game);
+						ex.init(e.getX()+MathUtils.random(-10, 10), e.getY()+MathUtils.random(-10, 10));
+						entities.add(ex);
+						expSound.play(game.sound);
 						
 					}
 					if(e instanceof Enemy && collider.get(z) instanceof Player) {
@@ -183,6 +196,17 @@ public class GameScreen implements Screen{
 					}
 					if(e instanceof Player && collider.get(z) instanceof Enemy) {
 						--e.life;
+						Explosion ex = new Explosion(game);
+						ex.init(e.getX()+MathUtils.random(-10, 10), e.getY()+MathUtils.random(-10, 10));
+						entities.add(ex);
+						ex = new Explosion(game);
+						ex.init(e.getX()+MathUtils.random(-10, 10), e.getY()+MathUtils.random(-10, 10));
+						entities.add(ex);
+						expSound.play(game.sound);
+						for(int iz = 0; iz < 20; iz++) {
+							ex = new Explosion(game);
+							ex.init(e.getX()+MathUtils.random(-10, 10), e.getY()+MathUtils.random(-10, 10), MathUtils.random(0,4));
+							entities.add(ex);
 					}
 				}
 			}
@@ -211,7 +235,7 @@ public class GameScreen implements Screen{
 		entities.removeAll(removeList);
 		removeList.clear();
 		Collections.sort(entities, new customComparator());
-		
+		System.out.println("Entities: " + entities.size());
 	}
 	int killCount = 0;
 	
@@ -248,6 +272,11 @@ public class GameScreen implements Screen{
 		
 		if(Gdx.input.isKeyPressed(Input.Keys.Z)) {
 			entities.add(new Tank(game));
+		}
+		if(Gdx.input.isKeyPressed(Input.Keys.X)) {
+			Explosion e = new Explosion(game);
+			e.init(MathUtils.random(000, 800), MathUtils.random(000, 400));
+			entities.add(e);
 		}
 		
 	}

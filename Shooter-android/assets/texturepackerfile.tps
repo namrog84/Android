@@ -40,7 +40,7 @@
             </struct>
         </struct>
         <key>shapePadding</key>
-        <uint>2</uint>
+        <uint>1</uint>
         <key>jpgQuality</key>
         <uint>80</uint>
         <key>pngOptimizationLevel</key>
@@ -50,11 +50,11 @@
         <key>textureFormat</key>
         <enum type="SettingsBase::TextureFormat">png</enum>
         <key>borderPadding</key>
-        <uint>0</uint>
+        <uint>1</uint>
         <key>maxTextureSize</key>
         <QSize>
             <key>width</key>
-            <int>512</int>
+            <int>2048</int>
             <key>height</key>
             <int>2048</int>
         </QSize>
@@ -70,7 +70,7 @@
         <key>algorithmSettings</key>
         <struct type="AlgorithmSettings">
             <key>algorithm</key>
-            <enum type="AlgorithmSettings::AlgorithmId">MaxRects</enum>
+            <enum type="AlgorithmSettings::AlgorithmId">Basic</enum>
             <key>freeSizeMode</key>
             <enum type="AlgorithmSettings::AlgorithmFreeSizeMode">Best</enum>
             <key>maxRects</key>
@@ -125,9 +125,9 @@
             <key>crop</key>
             <false/>
             <key>innerPadding</key>
-            <uint>0</uint>
+            <uint>1</uint>
             <key>extrude</key>
-            <uint>0</uint>
+            <uint>1</uint>
             <key>trimThreshold</key>
             <uint>1</uint>
             <key>trim</key>
@@ -145,6 +145,14 @@
             <filename>outer.png</filename>
             <filename>pad.png</filename>
             <filename>G:/resources/coptra/embeddable_76899/Image/bullet3.png</filename>
+            <filename>G:/resources/classic_low.png</filename>
+            <filename>G:/resources/coptra/embeddable_76899/Image/MissileTrail2.png</filename>
+            <filename>G:/resources/coptra/embeddable_76899/Image/missile.png</filename>
+            <filename>G:/resources/coptra/embeddable_76899/Image/Tank_ImgDummyTank.png</filename>
+            <filename>G:/resources/coptra/embeddable_76899/Image/Tank_ImgTank.png</filename>
+            <filename>G:/resources/coptra/embeddable_76899/Image/Tank_ImgTurret.png</filename>
+            <filename>G:/resources/coptra/embeddable_76899/Image/BulletFlash3.png</filename>
+            <filename>exploded.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -4,106 +4,113 @@ filter: Linear,Linear
 repeat: none
 MissileTrail2
   rotate: false
-  xy: 0, 258
-  size: 386, 28
-  orig: 396, 28
+  xy: 160, 2
+  size: 388, 30
+  orig: 398, 30
   offset: 10, 0
   index: -1
 plane
   rotate: false
-  xy: 495, 0
-  size: 100, 92
-  orig: 102, 102
+  xy: 2, 71
+  size: 102, 94
+  orig: 104, 104
   offset: 1, 5
   index: -1
 Tank_ImgTank
   rotate: false
-  xy: 169, 0
-  size: 58, 27
-  orig: 62, 31
+  xy: 65, 2
+  size: 60, 29
+  orig: 64, 33
   offset: 2, 2
   index: -1
 Tank_ImgDummyTank
   rotate: false
-  xy: 54, 0
-  size: 27, 27
-  orig: 31, 31
+  xy: 128, 2
+  size: 29, 29
+  orig: 33, 33
   offset: 2, 2
   index: -1
 Tank_ImgTurret
   rotate: false
-  xy: 28, 0
-  size: 24, 12
-  orig: 32, 20
+  xy: 36, 2
+  size: 26, 14
+  orig: 34, 22
   offset: 4, 4
   index: -1
 pad
   rotate: false
-  xy: 355, 0
-  size: 64, 64
-  orig: 64, 64
+  xy: 852, 2
+  size: 66, 66
+  orig: 66, 66
   offset: 0, 0
   index: -1
 bullet3
   rotate: false
-  xy: 12, 0
-  size: 14, 6
-  orig: 14, 6
+  xy: 2, 2
+  size: 16, 8
+  orig: 16, 8
   offset: 0, 0
   index: -1
 rotor1
   rotate: false
-  xy: 229, 0
-  size: 60, 60
-  orig: 60, 60
+  xy: 730, 2
+  size: 62, 62
+  orig: 62, 62
   offset: 0, 0
   index: -1
 missile
   rotate: false
-  xy: 0, 0
-  size: 10, 8
-  orig: 12, 10
+  xy: 21, 2
+  size: 12, 10
+  orig: 14, 12
   offset: 1, 1
   index: -1
 ship1
   rotate: false
-  xy: 421, 0
-  size: 72, 40
-  orig: 72, 40
+  xy: 586, 2
+  size: 74, 42
+  orig: 74, 42
   offset: 0, 0
   index: -1
 BulletFlash3
   rotate: false
-  xy: 83, 0
-  size: 30, 30
-  orig: 30, 30
+  xy: 551, 2
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
   index: -1
 cessna1
   rotate: false
-  xy: 115, 0
-  size: 52, 64
-  orig: 52, 64
+  xy: 795, 2
+  size: 54, 66
+  orig: 54, 66
   offset: 0, 0
   index: -1
 classic_low
   rotate: false
-  xy: 0, 288
-  size: 800, 480
-  orig: 800, 480
+  xy: 2, 394
+  size: 802, 482
+  orig: 802, 482
   offset: 0, 0
   index: -1
 harrier1
   rotate: false
-  xy: 291, 0
-  size: 62, 47
-  orig: 62, 47
+  xy: 663, 2
+  size: 64, 49
+  orig: 64, 49
   offset: 0, 0
+  index: -1
+exploded
+  rotate: false
+  xy: 368, 71
+  size: 322, 320
+  orig: 322, 322
+  offset: 0, 1
   index: -1
 outer
   rotate: false
-  xy: 597, 0
-  size: 256, 256
-  orig: 256, 256
+  xy: 107, 71
+  size: 258, 258
+  orig: 258, 258
   offset: 0, 0
   index: -1
