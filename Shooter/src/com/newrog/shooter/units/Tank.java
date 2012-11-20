@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.newrog.shooter.Art;
 import com.newrog.shooter.ShooterGame;
 
 public class Tank extends Enemy {
@@ -13,13 +14,12 @@ public class Tank extends Enemy {
 	public Tank(ShooterGame game) {
 		super(game);
 		velo = new Vector2(1, 1);
-		TextureRegion region = game.theArt.findRegion("Tank_ImgDummyTank");
-		TextureRegion region2 = game.theArt.findRegion("Tank_ImgTurret");
 		
-		sprite = new Sprite(region);
+		
+		sprite = new Sprite(Art.tankDummyTR);
 		sprite.flip(true, false);
 		sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
-		turret = new Sprite(region2);
+		turret = new Sprite(Art.tankTurretTR);
 		turret.setOrigin(turret.getWidth()/2, turret.getHeight()/2);
 		
 		setHeight(sprite.getHeight());

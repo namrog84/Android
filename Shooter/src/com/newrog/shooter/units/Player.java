@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.newrog.shooter.Art;
 import com.newrog.shooter.ShooterGame;
 
 public class Player extends Entity {
@@ -21,12 +22,12 @@ public class Player extends Entity {
 	public Player(ShooterGame game) {
 		this.game = game;
 		//this.setZIndex(2500);
-		TextureRegion region = game.theArt.findRegion("ship1");
-		sprite = new Sprite(region);
+		
+		sprite = new Sprite(Art.shipTR);
 		sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
 		sprite.setPosition(-sprite.getWidth() / 2, -sprite.getHeight() / 2);
 
-		shadow = new Sprite(region);
+		shadow = new Sprite(Art.shipTR);
 
 		shadow.setPosition(-sprite.getWidth() / 3, -sprite.getHeight() / 3);
 		zIndex= 20;

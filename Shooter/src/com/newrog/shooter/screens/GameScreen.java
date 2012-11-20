@@ -31,6 +31,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Touchpad.TouchpadStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
+import com.newrog.shooter.Art;
 import com.newrog.shooter.ShooterGame;
 import com.newrog.shooter.units.Airplane;
 import com.newrog.shooter.units.Ammunition;
@@ -78,7 +79,7 @@ public class GameScreen implements Screen{
 		entities.add(p);
 		expSound = Gdx.audio.newSound(Gdx.files.internal("sound_40.wav"));
 		
-		Skin stag = new Skin(game.theArt);
+		Skin stag = new Skin(Art.theArt);
 		TouchpadStyle tps = new TouchpadStyle();
 		tps.background = stag.getDrawable("outer");
 		tps.knob = stag.getDrawable("pad");
@@ -126,7 +127,7 @@ public class GameScreen implements Screen{
 		stage.addActor(buttonMulti);
 		stage.addActor(changeWeaponButton);
 		
-		background = new Sprite(game.theArt.findRegion("classic_low"));
+		background = new Sprite(Art.background);
 		//background.setPosition(0, 44);
 		
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("data/CONSOLA.TTF"));
@@ -207,6 +208,7 @@ public class GameScreen implements Screen{
 							ex = new Explosion(game);
 							ex.init(e.getX()+MathUtils.random(-10, 10), e.getY()+MathUtils.random(-10, 10), MathUtils.random(0,4));
 							entities.add(ex);
+						}
 					}
 				}
 			}

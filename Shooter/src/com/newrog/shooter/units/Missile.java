@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.newrog.shooter.Art;
 import com.newrog.shooter.ShooterGame;
 
 public class Missile extends Ammunition {
@@ -18,22 +19,12 @@ public class Missile extends Ammunition {
 	Sprite smokeSprite;
 	Animation smoke;
 	
-	TextureRegion[] smokeyTrail;
-	TextureRegion currentFrame;
+	
 	public Missile(ShooterGame game, float angle, float x, float y) {
 		super(game, angle, x, y);
 	
-		TextureRegion region = game.theArt.findRegion("missile");
-		TextureRegion region2 = game.theArt.findRegion("MissileTrail2");
-		TextureRegion[][] tmp = region2.split(64, 28);
-		TextureRegion[] smokeyTrail = new TextureRegion[5];
-		
-		for(int i = 0; i < 5; i++) {
-			smokeyTrail[i] = tmp[0][i];
-		}
-		System.out.println("A " + tmp.length);
-		smoke = new Animation(.15f, smokeyTrail);
-		sprite = new Sprite(region);
+		smoke = new Animation(.15f, Art.missileTrailTRegions);
+		sprite = new Sprite(Art.missileTR);
 		sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
 		sprite.setPosition(-sprite.getWidth(), -sprite.getHeight() / 2);
 		smokeSprite = new Sprite(smoke.getKeyFrame(0));
@@ -140,7 +131,7 @@ public class Missile extends Ammunition {
 	
 		if(exists) {
 			stateTime+= Gdx.graphics.getDeltaTime();
-			currentFrame = smoke.getKeyFrame(stateTime, true);
+			TextureRegion currentFrame = smoke.getKeyFrame(stateTime, true);
 
 			smokeSprite.setRegion(currentFrame);
 			smokeSprite.setRotation(getRotation());

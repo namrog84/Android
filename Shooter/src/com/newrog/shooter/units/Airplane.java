@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.newrog.shooter.Art;
 import com.newrog.shooter.ShooterGame;
 
 public class Airplane extends Enemy {
@@ -12,12 +13,12 @@ public class Airplane extends Enemy {
 	public Airplane(ShooterGame game) {
 		super(game);
 		velo = new Vector2(1, 1);
-		TextureRegion region = game.theArt.findRegion("harrier1");
 		
-		sprite = new Sprite(region);
+		
+		sprite = new Sprite(Art.airplaneTR);
 		sprite.flip(true, false);
 		sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
-		shadow = new Sprite(region);
+		shadow = new Sprite(Art.airplaneTR);
 		shadow.flip(true, false);
 		shadow.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
 		setHeight(.75f*sprite.getHeight());

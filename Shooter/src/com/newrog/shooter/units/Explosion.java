@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.newrog.shooter.Art;
 import com.newrog.shooter.ShooterGame;
 
 public class Explosion extends Entity {
@@ -16,22 +17,10 @@ public class Explosion extends Entity {
 	private Animation smoke;
 
 	public Explosion (ShooterGame game) {
-		
-		TextureRegion tmp0 = game.theArt.findRegion("exploded");
-		
-		TextureRegion[][] tmp = tmp0.split(64, 64);
-		
-		TextureRegion[] explosionRegions = new TextureRegion[25];
-		//System.out.println(tmp[4].length);
-		int index = 0;
-		for (int i = 0; i < 5; i++) {
-			for (int j = 0; j < 5; j++) {
-				explosionRegions[index++] = tmp[i][j];
-			}
-		}
-		smoke = new Animation(.03f, explosionRegions);
+	
+		smoke = new Animation(.03f, Art.explosionTRegions);
 		sprite = new Sprite(smoke.getKeyFrame(0));
-		
+		zIndex= 50;
 		active = false;
 	}
 

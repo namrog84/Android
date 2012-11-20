@@ -3,6 +3,7 @@ package com.newrog.shooter.units;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.newrog.shooter.Art;
 import com.newrog.shooter.ShooterGame;
 
 public class TankBullet extends Enemy {
@@ -14,8 +15,8 @@ public class TankBullet extends Enemy {
 	public TankBullet(ShooterGame game, float angle, float x, float y) {
 		super(game);
 		new Flash(game, x, y);
-		TextureRegion region = game.theArt.findRegion("bullet3");
-		sprite = new Sprite(region);
+		
+		sprite = new Sprite(Art.tankBulletTR);
 		sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
 		sprite.setPosition(-sprite.getWidth()/2, -sprite.getHeight() / 2);
 
