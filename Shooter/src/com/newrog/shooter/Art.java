@@ -19,6 +19,7 @@ public class Art {
 	public static TextureRegion tankTurretTR;
 	public static TextureRegion tankBulletTR;
 	public static TextureRegion tankDummyTR;
+	public static TextureRegion powerUpTR;
 
 	private Art () {
 		/*

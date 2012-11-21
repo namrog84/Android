@@ -15,12 +15,7 @@ import com.newrog.shooter.screens.IntroScreen;
 // add c-130
 // add enemy helicopter
 
-// add screen shake
-
-// powerup(switch weapons)
 // laser weapons
-// spread fire bullets
-// bombs
 
 
 
@@ -34,15 +29,12 @@ public class ShooterGame extends Game {
 	
 	@Override
 	public void create() {
-		System.out.println("ART");
 		Art.init();
 		
-		//theArt = new TextureAtlas("arty.txt");
-		System.out.println("ART END");
+		
 		introScreen = new IntroScreen(this);
 		gameScreen = new GameScreen(this);
 
-		
 		setScreen(introScreen);
 	}
 	

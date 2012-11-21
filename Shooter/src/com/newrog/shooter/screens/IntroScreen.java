@@ -40,6 +40,8 @@ public class IntroScreen implements Screen {
 	
 	private Button buttonMulti;
 	private Label label;
+	private Button buttonMulti2;
+	private Label label2;
 	private Window window;
 	
 	public IntroScreen (ShooterGame game) {
@@ -72,8 +74,8 @@ public class IntroScreen implements Screen {
 		generator.dispose();
 
 		window.setStyle(ws);
-		window.setWidth(stage.getWidth() / 2);
-		window.setHeight(stage.getHeight() / 2);
+		window.setWidth(stage.getWidth() / 2+stage.getWidth() / 4);
+		window.setHeight(stage.getHeight() / 2+stage.getHeight() / 4);
 		window.setPosition(stage.getWidth() / 2 - window.getWidth() / 2, stage.getHeight() / 2 - window.getHeight() / 2);
 		window.setMovable(true);
 
@@ -89,11 +91,10 @@ public class IntroScreen implements Screen {
 		});
 
 		WidgetGroup widGrp = new WidgetGroup();
-		
 		buttonMulti.setWidth(window.getWidth() / 2);
 		buttonMulti.setHeight(window.getHeight() / 3);
 		buttonMulti.setX(-buttonMulti.getWidth() / 2);
-		buttonMulti.setY(-buttonMulti.getHeight() / 2);
+		buttonMulti.setY(+buttonMulti.getHeight() / 3);
 		buttonMulti.addActor(label);
 		label.addListener(new ClickListener() {
 			@Override
@@ -111,7 +112,45 @@ public class IntroScreen implements Screen {
 		});
 		label.setPosition(buttonMulti.getWidth() / 2 - label.getWidth() / 2, buttonMulti.getHeight() / 2 - label.getHeight() / 2);
 		widGrp.addActor(buttonMulti);
+		
+		
+		buttonMulti2 = new Button(aa, "default");
+		buttonMulti2.addListener(new ClickListener() {
+			@Override
+			public void clicked (InputEvent event, float x, float y) {
+				setScreen();
+			}
+		});
+
+		
+		
+		label2 = new Label("INFO", new LabelStyle(f, Color.WHITE));
+		WidgetGroup widGrp2 = new WidgetGroup();
+		buttonMulti2.setWidth(window.getWidth() / 2);
+		buttonMulti2.setHeight(window.getHeight() / 3);
+		buttonMulti2.setX(-buttonMulti2.getWidth() / 2);
+		buttonMulti2.setY(-buttonMulti2.getHeight() );
+		buttonMulti2.addActor(label2);
+		label2.addListener(new ClickListener() {
+			@Override
+			public void enter (InputEvent event, float x, float y, int pointer, Actor fromActor) {
+				if (pointer == -1) {
+					label2.setColor(Color.BLACK);
+				}
+			}
+			@Override
+			public void exit (InputEvent event, float x, float y, int pointer, Actor fromActor) {
+				if (pointer == -1) {
+					label2.setColor(Color.WHITE);
+				}
+			}
+		});
+		label2.setPosition(buttonMulti2.getWidth() / 2 - label2.getWidth() / 2, buttonMulti2.getHeight() / 2 - label2.getHeight() / 2);
+		widGrp2.addActor(buttonMulti2);
+		
+		
 		window.add(widGrp);
+		window.add(widGrp2);
 		stage.addActor(window);
 	}
 

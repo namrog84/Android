@@ -2,7 +2,6 @@ package com.newrog.shooter.units;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.newrog.shooter.Art;
 import com.newrog.shooter.ShooterGame;
 
@@ -41,14 +40,11 @@ public class Bullet extends Ammunition {
 	protected void update() {
 		super.update();
 		
-		//translate(speed * MathUtils.cosDeg(getRotation()), speed * MathUtils.sinDeg(getRotation()));
-	
 	}
 
 
 	@Override
 	protected void render(SpriteBatch batch) {
-
 		if(exists) {
 			sprite.setRotation(getRotation());
 			sprite.setPosition(getX()-getWidth()/2, getY());

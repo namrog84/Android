@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -20,6 +19,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -39,6 +39,7 @@ import com.newrog.shooter.units.Enemy;
 import com.newrog.shooter.units.Entity;
 import com.newrog.shooter.units.Explosion;
 import com.newrog.shooter.units.Player;
+import com.newrog.shooter.units.PowerUp;
 import com.newrog.shooter.units.Tank;
 import com.newrog.shooter.units.TankBullet;
 
@@ -57,6 +58,8 @@ public class GameScreen implements Screen{
 	public  List<Entity> entities;
 	public OrthographicCamera camera;
 	public Array<Entity> specialEffects;
+	public static Array<PowerUp> powerUps;
+	
 	public GameScreen(ShooterGame game) {
 		entities = new ArrayList<Entity>();
 		this.game = game;
@@ -68,9 +71,12 @@ public class GameScreen implements Screen{
 		System.out.println(stage.getWidth());
 		camera = new OrthographicCamera(800, 480);
 		camera.translate(400, 240);
+		oldCamera = new Vector3(camera.position); //default camera
 		camera.update();
 		//camera = stage.getCamera();
 		specialEffects = new Array<Entity>();
+		powerUps = new Array<PowerUp>();
+		
 		batch = new SpriteBatch();
 		batch.setProjectionMatrix(camera.combined);
 		
@@ -143,10 +149,10 @@ public class GameScreen implements Screen{
 	SpriteBatch batch;
 	public void cycleWeapons () {
 		p.weaponToggle = !p.weaponToggle;
-		
 	}
 	
 	Sprite background;
+	private float shakeIntensity = 5f;
 	
 	@Override
 	public void render(float delta)
@@ -156,12 +162,12 @@ public class GameScreen implements Screen{
 		
 		Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-	
+		
 		//stage.act();
 		
-		
+		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		
+
 		//background.setScale(scaleX, scaleY);
 		background.draw(batch);
 		
@@ -189,6 +195,11 @@ public class GameScreen implements Screen{
 						ex.init(e.getX()+MathUtils.random(-10, 10), e.getY()+MathUtils.random(-10, 10));
 						entities.add(ex);
 						expSound.play(game.sound);
+						cameraShakeTicks+=10;
+						if (MathUtils.random(0, 100) < 15) {
+							new PowerUp(game, e.getX(), e.getY());
+						}
+						
 						
 					}
 					if(e instanceof Enemy && collider.get(z) instanceof Player) {
@@ -203,6 +214,8 @@ public class GameScreen implements Screen{
 						ex = new Explosion(game);
 						ex.init(e.getX()+MathUtils.random(-10, 10), e.getY()+MathUtils.random(-10, 10));
 						entities.add(ex);
+						cameraShakeTicks+=50;
+						shakeIntensity = 15;
 						expSound.play(game.sound);
 						for(int iz = 0; iz < 20; iz++) {
 							ex = new Explosion(game);
@@ -219,6 +232,26 @@ public class GameScreen implements Screen{
 
 			}
 		}
+		for(int i =0 ;i < powerUps.size;++i) {
+			powerUps.get(i).draw(batch);
+			if(powerUps.get(i).rect.overlaps(p.rect)) {
+				if(powerUps.get(i).type == PowerUp.PType.SPREAD)
+					p.ammo += 200;
+				if(powerUps.get(i).type == PowerUp.PType.MISSILE)
+					p.weaponToggle = !p.weaponToggle;
+				if(powerUps.get(i).type == PowerUp.PType.BOMB) {
+					for(int j = 0 ; j <entities.size();++j) {
+						if(entities.get(j) instanceof Enemy) {
+							entities.get(j).life = 0;
+						}
+						
+					}
+					shakeIntensity = 50;
+					cameraShakeTicks+=10;
+				}
+				powerUps.removeIndex(i);
+			}
+		}
 		batch.end();
 		stage.draw();
 		//System.out.println(entities.size());
@@ -232,6 +265,21 @@ public class GameScreen implements Screen{
 			sixty = 0;
 		}
 		fps.log();
+		
+		if(cameraShakeTicks>0) {
+			camera.translate(-offsetCamera.x, -offsetCamera.y);
+			offsetCamera.x = MathUtils.random(0,shakeIntensity );
+			offsetCamera.y = MathUtils.random(0,shakeIntensity);
+			camera.translate(offsetCamera.x, offsetCamera.y);
+			cameraShakeTicks--;
+		}else {
+			shakeIntensity = 3;
+			camera.position.set(oldCamera);
+			//oldCamera = camera.position;
+		}
+
+		//stage.getCamera().translate(10, 0, 0);
+//		camera.translate(10, 0, 0);
 		camera.update();
 		
 		entities.removeAll(removeList);
@@ -239,6 +287,9 @@ public class GameScreen implements Screen{
 		Collections.sort(entities, new customComparator());
 		System.out.println("Entities: " + entities.size());
 	}
+	Vector3 offsetCamera = new Vector3(0,0,0);
+	Vector3 oldCamera;
+	float cameraShakeTicks = 0;
 	int killCount = 0;
 	
 	

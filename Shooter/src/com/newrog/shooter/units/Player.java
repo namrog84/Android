@@ -38,7 +38,7 @@ public class Player extends Entity {
 		prop = new Prop(game);
 		bulletSound = Gdx.audio.newSound(Gdx.files.internal("sound_33.wav"));
 		missileSound = Gdx.audio.newSound(Gdx.files.internal("SndMissile_.wav"));
-
+		ammo = 0;
 	}
 
 	//messy approach to prop, should I combine it with the helicopter in the form of a sprite?
@@ -116,23 +116,33 @@ public class Player extends Entity {
 	public boolean weaponToggle = true;
 	boolean blah = false;
 
+	public int ammo;
+
 	public void shoot() {
 		if (shootTimer > shootDelay)
 		{
-			if(weaponToggle) {
-				game.gameScreen.entities.add(
-						new Bullet(game, getRotation(), 
-									getCenterX() + 40 * MathUtils.cosDeg(getRotation()+15), 
-									getCenterY() + 40 * MathUtils.sinDeg(getRotation()+15)
-									)
-						);
-				game.gameScreen.entities.add(
-						new Bullet(game, getRotation(), 
-									getCenterX() + 40 * MathUtils.cosDeg(getRotation()-15), 
-									getCenterY() + 40 * MathUtils.sinDeg(getRotation()-15)
-									)
-						);
+			if (weaponToggle) {
+				game.gameScreen.entities
+					.add(new Bullet(game, getRotation(), getCenterX() + 40 * MathUtils.cosDeg(getRotation() + 15), getCenterY() + 40
+						* MathUtils.sinDeg(getRotation() + 15)));
+				game.gameScreen.entities
+					.add(new Bullet(game, getRotation(), getCenterX() + 40 * MathUtils.cosDeg(getRotation() - 15), getCenterY() + 40
+						* MathUtils.sinDeg(getRotation() - 15)));
+				if (ammo > 0) {
+					game.gameScreen.entities.add(new Bullet(game, getRotation()+10, getCenterX() + 40
+						* MathUtils.cosDeg(getRotation() + 15), getCenterY() + 40 * MathUtils.sinDeg(getRotation() + 15)));
+					game.gameScreen.entities.add(new Bullet(game, getRotation()+20, getCenterX() + 40
+						* MathUtils.cosDeg(getRotation() + 15), getCenterY() + 40 * MathUtils.sinDeg(getRotation() + 15)));
+					
+					game.gameScreen.entities.add(new Bullet(game, getRotation()-10, getCenterX() + 40
+						* MathUtils.cosDeg(getRotation() - 15), getCenterY() + 40 * MathUtils.sinDeg(getRotation() - 15)));
+					game.gameScreen.entities.add(new Bullet(game, getRotation()-20, getCenterX() + 40
+						* MathUtils.cosDeg(getRotation() - 15), getCenterY() + 40 * MathUtils.sinDeg(getRotation() - 15)));
+					ammo-=4;
+				}
+				
 				bulletSound.play(game.sound);
+				
 			}else {
 				game.gameScreen.entities.add(
 						new Missile(game, getRotation(), 

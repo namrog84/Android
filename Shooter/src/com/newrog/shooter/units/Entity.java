@@ -1,3 +1,4 @@
+
 package com.newrog.shooter.units;
 
 import com.badlogic.gdx.Gdx;
@@ -22,121 +23,107 @@ public abstract class Entity {
 	public int zIndex = 0;
 	public boolean active = true;
 
-	public Rectangle rect = new Rectangle(0,0,15,5);
+	public Rectangle rect = new Rectangle(0, 0, 15, 5);
 	protected Vector2 velo = new Vector2(0, 0);
 	protected float direction;
 	public float speed = 1;
-	 ShapeRenderer sr = new ShapeRenderer();
 
-		protected float delta;
-		private boolean debug = true;
+	ShapeRenderer sr = new ShapeRenderer();
 
-	 
-	public Entity() {
+	protected float delta;
+	private boolean debug = true;
+
+	public Entity () {
 
 	}
-	
-	protected void setSpeed(float speed2) {
+
+	protected void setSpeed (float speed2) {
 		speed = speed2;
 		computeVelocity();
 	}
 
-	
-	
-	
-	//private Vector2 position = new Vector2(0, 0);
-
-
-	public void setRotation(float angle) {
+	public void setRotation (float angle) {
 		direction = angle;
 	}
 
-	public void rotate(float angle) {
+	public void rotate (float angle) {
 		direction += angle;
 	}
 
-	protected void setSize(float width, float height) {
+	protected void setSize (float width, float height) {
 		rect.setWidth(width);
 		rect.setHeight(height);
 
 	}
 
-	public void setPosition(float x, float y) {
+	public void setPosition (float x, float y) {
 		rect.x = x;
 		rect.y = y;
 	}
-	
-	//private void setScale(double d) {
-		// TODO Auto-generated method stub
-		
-	//}
 
-	
-
-	public void draw(SpriteBatch batch) {
+	public void draw (SpriteBatch batch) {
 		delta = Gdx.graphics.getDeltaTime();
-		if (active)
-			update();
+		if (active) update();
 
-		// if(isVisible())
-		 render(batch);
-		 
-		 if(debug) {
-		 sr.setProjectionMatrix(batch.getProjectionMatrix());
-		 sr.begin(ShapeType.Rectangle);
-		 sr.setColor(Color.RED);
-		 sr.rect(getX(), getY(), getWidth(), getHeight());
-		 sr.end();
-		 }
+		render(batch);
+
+		if (debug) {
+			sr.setProjectionMatrix(batch.getProjectionMatrix());
+			sr.begin(ShapeType.Rectangle);
+			sr.setColor(Color.RED);
+			sr.rect(getX(), getY(), getWidth(), getHeight());
+			sr.end();
+		}
 	}
-	
 
-	protected abstract void update();
+	protected abstract void update ();
 
-	protected abstract void render(SpriteBatch batch);
+	protected abstract void render (SpriteBatch batch);
 
-	protected float getHeight() {
+	protected float getHeight () {
 		return rect.getHeight();
 	}
 
-	public float getCenterX() {
-		return rect.x + rect.width/2;
+	public float getCenterX () {
+		return rect.x + rect.width / 2;
 	}
-	public float getCenterY() {
-		return rect.y + rect.height/2;
+
+	public float getCenterY () {
+		return rect.y + rect.height / 2;
 	}
-	public float getY() {
+
+	public float getY () {
 		return rect.y;
 	}
 
-	protected float getWidth() {
+	protected float getWidth () {
 		return rect.getWidth();
-		
+
 	}
 
-	public float getX() {
+	public float getX () {
 		return rect.x;
 	}
 
-	public float getRotation() {
+	public float getRotation () {
 		return direction;
 	}
 
-	public void translate(float x, float y) {
+	public void translate (float x, float y) {
 		rect.x += x;
 		rect.y += y;
 	}
 
-	protected void setWidth(float width) {
+	protected void setWidth (float width) {
 		rect.setWidth(width);
 
 	}
 
-	protected void setHeight(float height) {
+	protected void setHeight (float height) {
 		rect.setHeight(height);
 	}
 
-	protected void moveTo(float newDirection, float strengthMove) {
+	protected void moveTo (float newDirection, float strengthMove) {
 		float x1 = MathUtils.cosDeg(direction) * speed;
 		float y1 = MathUtils.sinDeg(direction) * speed;
 		float x2 = MathUtils.cosDeg(newDirection) * strengthMove;
@@ -144,24 +131,21 @@ public abstract class Entity {
 		float xc = x1 + x2;
 		float yc = y1 + y2;
 
-		speed = (float) Math.sqrt(xc * xc + yc + yc);
+		speed = (float)Math.sqrt(xc * xc + yc + yc);
 		direction = MathUtils.atan2(yc, xc) * MathUtils.radiansToDegrees;
 	}
 
-	protected void calculateSpeed() {
-		float a = (float) Math.sqrt(velo.x * velo.x + velo.y * velo.y);
-		if (a > 0)
-		{
+	protected void calculateSpeed () {
+		float a = (float)Math.sqrt(velo.x * velo.x + velo.y * velo.y);
+		if (a > 0) {
 			speed = a;
 		}
 		computeVelocity();
 	}
 
-	protected void computeVelocity() {
+	protected void computeVelocity () {
 		velo.x = speed * MathUtils.cosDeg(direction);
 		velo.y = speed * MathUtils.sinDeg(direction);
 	}
-
-	
 
 }
