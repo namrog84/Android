@@ -24,7 +24,7 @@ public class Tank extends Enemy {
 		
 		setHeight(sprite.getHeight());
 		setWidth(sprite.getWidth());
-
+		setRadius(sprite.getWidth()/2);
 		
 		speedXModifer = 1.5f;
 		speedYModifer = 1.5f;

@@ -21,8 +21,8 @@ import com.newrog.shooter.screens.IntroScreen;
 
 public class ShooterGame extends Game {
 
-	public IntroScreen introScreen;
-	public GameScreen gameScreen;
+	public static IntroScreen introScreen;
+	public static GameScreen gameScreen;
 	//public TextureAtlas theArt;
 	
 	public float sound = 1.0f;
@@ -46,8 +46,12 @@ public class ShooterGame extends Game {
 	
 	@Override
 	public void resume () {
-		super.resume();
-		
+		super.resume();	
 	}
+	
+	public static GameScreen getGameScreenInstance() {
+		return gameScreen;
+	}
+	
 
 }

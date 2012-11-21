@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -24,6 +25,7 @@ public abstract class Entity {
 	public boolean active = true;
 
 	public Rectangle rect = new Rectangle(0, 0, 15, 5);
+	public Circle circle = new Circle(0,0,2);
 	protected Vector2 velo = new Vector2(0, 0);
 	protected float direction;
 	public float speed = 1;
@@ -33,6 +35,8 @@ public abstract class Entity {
 	protected float delta;
 	private boolean debug = true;
 
+	
+	
 	public Entity () {
 
 	}
@@ -53,12 +57,13 @@ public abstract class Entity {
 	protected void setSize (float width, float height) {
 		rect.setWidth(width);
 		rect.setHeight(height);
-
 	}
-
+	
 	public void setPosition (float x, float y) {
 		rect.x = x;
 		rect.y = y;
+		circle.x = getCenterX();
+		circle.y = getCenterY();
 	}
 
 	public void draw (SpriteBatch batch) {
@@ -66,14 +71,26 @@ public abstract class Entity {
 		if (active) update();
 
 		render(batch);
-
+		batch.end();
 		if (debug) {
 			sr.setProjectionMatrix(batch.getProjectionMatrix());
-			sr.begin(ShapeType.Rectangle);
-			sr.setColor(Color.RED);
-			sr.rect(getX(), getY(), getWidth(), getHeight());
+			sr.begin(ShapeType.FilledCircle);
+			sr.setColor(1, 0, 0, .1f);
+			sr.filledCircle(circle.x, circle.y, circle.radius);
 			sr.end();
 		}
+		batch.begin();
+		
+		
+
+	
+	
+	}
+	public void setRadius(float r) {
+		circle.radius = r;
+	}
+	public float getRadius() {
+		return circle.radius;
 	}
 
 	protected abstract void update ();
@@ -112,6 +129,8 @@ public abstract class Entity {
 	public void translate (float x, float y) {
 		rect.x += x;
 		rect.y += y;
+		circle.x = getCenterX();
+		circle.y = getCenterY();
 	}
 
 	protected void setWidth (float width) {

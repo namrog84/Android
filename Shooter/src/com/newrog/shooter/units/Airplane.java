@@ -23,7 +23,8 @@ public class Airplane extends Enemy {
 		shadow.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
 		setHeight(.75f*sprite.getHeight());
 		setWidth(.75f*sprite.getWidth());
-
+		setRadius(sprite.getWidth()/3);
+		
 		zIndex = 10; 
 		speedXModifer = 2.5f;
 		speedYModifer = 2.5f;

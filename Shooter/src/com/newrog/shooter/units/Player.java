@@ -35,6 +35,8 @@ public class Player extends Entity {
 		setHeight(sprite.getHeight()/2);
 		setWidth(sprite.getWidth()/4);
 		
+		setRadius(sprite.getHeight()/2-sprite.getHeight()/8);
+		
 		prop = new Prop(game);
 		bulletSound = Gdx.audio.newSound(Gdx.files.internal("sound_33.wav"));
 		missileSound = Gdx.audio.newSound(Gdx.files.internal("SndMissile_.wav"));
@@ -112,6 +114,8 @@ public class Player extends Entity {
 			this.setRotation(MathUtils.radiansToDegrees*MathUtils.atan2(-getCenterY()+v2.y, -getCenterX()+v2.x));
 			this.shoot();
 		}
+		circle.x = getCenterX() + MathUtils.cosDeg(getRotation())*13;
+		circle.y = getCenterY() + MathUtils.sinDeg(getRotation())*13;
 	}
 	public boolean weaponToggle = true;
 	boolean blah = false;
@@ -170,7 +174,7 @@ public class Player extends Entity {
 
 	@Override
 	protected void update() {
-
+		
 	}
 
 }

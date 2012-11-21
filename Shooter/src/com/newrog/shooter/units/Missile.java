@@ -32,6 +32,7 @@ public class Missile extends Ammunition {
 		setRotation(angle);
 		setPosition(x, y);
 		setSize(sprite.getWidth() / 2, sprite.getHeight());
+		setRadius(sprite.getWidth()/3);
 		speed = 5f;
 		
 		//smokeSprite = new Sprite(region);

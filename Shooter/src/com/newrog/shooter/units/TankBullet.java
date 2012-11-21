@@ -25,6 +25,7 @@ public class TankBullet extends Enemy {
 		setPosition(x-sprite.getHeight()/2, y-sprite.getHeight()/2);
 		
 		setSize(sprite.getWidth() / 2, sprite.getHeight());
+		setRadius(sprite.getWidth()/3);
 		speed = 6f;
 		
 		exists = true;
