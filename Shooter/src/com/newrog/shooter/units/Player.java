@@ -126,12 +126,16 @@ public class Player extends Entity {
 		if (shootTimer > shootDelay)
 		{
 			if (weaponToggle) {
-				game.gameScreen.entities
-					.add(new Bullet(game, getRotation(), getCenterX() + 40 * MathUtils.cosDeg(getRotation() + 15), getCenterY() + 40
-						* MathUtils.sinDeg(getRotation() + 15)));
-				game.gameScreen.entities
-					.add(new Bullet(game, getRotation(), getCenterX() + 40 * MathUtils.cosDeg(getRotation() - 15), getCenterY() + 40
-						* MathUtils.sinDeg(getRotation() - 15)));
+			    Bullet b = AmmunitionPool.getBullet();
+			    b.init(getRotation(), getCenterX() + 40 * MathUtils.cosDeg(getRotation() + 15), getCenterY() + 40
+                    * MathUtils.sinDeg(getRotation() + 15));
+                game.gameScreen.entities.add(b);
+                
+                b = AmmunitionPool.getBullet();
+                b.init(getRotation(), getCenterX() + 40 * MathUtils.cosDeg(getRotation() - 15), getCenterY() + 40
+                    * MathUtils.sinDeg(getRotation() - 15));
+				game.gameScreen.entities.add(b);
+				
 				if (ammo > 0) {
 					game.gameScreen.entities.add(new Bullet(game, getRotation()+10, getCenterX() + 40
 						* MathUtils.cosDeg(getRotation() + 15), getCenterY() + 40 * MathUtils.sinDeg(getRotation() + 15)));
@@ -169,7 +173,7 @@ public class Player extends Entity {
 	}
 
 	public void dispose() {
-		texture.dispose();
+		//texture.dispose();
 	}
 
 	@Override

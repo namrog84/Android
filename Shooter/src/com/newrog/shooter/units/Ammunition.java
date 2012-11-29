@@ -7,7 +7,7 @@ import com.newrog.shooter.ShooterGame;
 public class Ammunition extends Entity {
 
 	//public float speed = 10.0f;
-	private int lifeSpan = 100;
+	protected int lifeSpan = 100;
 	protected boolean exists = false;
 	protected float timer1 = 0;
 	
@@ -25,9 +25,9 @@ public class Ammunition extends Entity {
 
 	}
 
-	public void dispose() {
-		texture.dispose();
-	}
+	//public void dispose() {
+		//texture.dispose();
+	//}
 
 	@Override
 	protected void update() {
@@ -37,6 +37,7 @@ public class Ammunition extends Entity {
 		if (lifeSpan < 0)
 		{
 			life = 0;
+			
 		}
 		--lifeSpan;
 	}

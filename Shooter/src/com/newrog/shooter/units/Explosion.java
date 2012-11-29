@@ -54,6 +54,7 @@ public class Explosion extends Entity {
 			if (smoke.isAnimationFinished(stateTime)) {
 				active = false;
 				life = 0;
+				
 			}
 		}
 	}

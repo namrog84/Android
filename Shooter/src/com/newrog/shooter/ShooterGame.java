@@ -3,6 +3,7 @@ package com.newrog.shooter;
 import com.badlogic.gdx.Game;
 import com.newrog.shooter.screens.GameScreen;
 import com.newrog.shooter.screens.IntroScreen;
+import com.newrog.shooter.units.AmmunitionPool;
 
 
 // TODO:
@@ -30,7 +31,8 @@ public class ShooterGame extends Game {
 	@Override
 	public void create() {
 		Art.init();
-		
+		AmmunitionPool p = new AmmunitionPool(this);
+		AmmunitionPool.init();
 		
 		introScreen = new IntroScreen(this);
 		gameScreen = new GameScreen(this);

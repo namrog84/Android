@@ -46,7 +46,7 @@ public class Missile extends Ammunition {
 
 	@Override
 	public void dispose() {
-		texture.dispose();
+		//texture.dispose();
 	}
 
 	@Override

@@ -36,7 +36,9 @@ import com.newrog.shooter.Art;
 import com.newrog.shooter.ShooterGame;
 import com.newrog.shooter.units.Airplane;
 import com.newrog.shooter.units.Ammunition;
+import com.newrog.shooter.units.AmmunitionPool;
 import com.newrog.shooter.units.Bomb;
+import com.newrog.shooter.units.Bullet;
 import com.newrog.shooter.units.Enemy;
 import com.newrog.shooter.units.Entity;
 import com.newrog.shooter.units.Explosion;
@@ -256,7 +258,9 @@ public class GameScreen implements Screen {
 		stage.draw();
 		// System.out.println(entities.size());
 
+		if(entities.size() < 100)
 		if (sixty++ > 30 || Gdx.input.isKeyPressed(Input.Keys.B)) {
+		    
 			if (MathUtils.randomBoolean())
 				entities.add(new Airplane(game));
 			else
@@ -282,7 +286,16 @@ public class GameScreen implements Screen {
 // camera.translate(10, 0, 0);
 		camera.update();
 
+		for(int i = 0; i < removeList.size(); i++) {
+		    removeList.get(i).dispose();
+		}
 		entities.removeAll(removeList);
+		
+		for(int i = 0; i < removeList.size(); i++) {
+		    if(removeList.get(i) instanceof Bullet) {
+		        AmmunitionPool.returnBullet((Bullet)removeList.get(i));
+		    }
+		}
 		removeList.clear();
 		Collections.sort(entities, new customComparator());
 		System.out.println("Entities: " + entities.size());

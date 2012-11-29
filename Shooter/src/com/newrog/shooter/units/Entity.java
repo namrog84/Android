@@ -30,12 +30,14 @@ public abstract class Entity {
 	protected float direction;
 	public float speed = 1;
 
-	ShapeRenderer sr = new ShapeRenderer();
+	//ShapeRenderer sr = new ShapeRenderer();
 
 	protected float delta;
-	private boolean debug = true;
+	private boolean debug = false;
 
-	
+	public void dispose() {
+	    
+	}
 	
 	public Entity () {
 
@@ -60,6 +62,7 @@ public abstract class Entity {
 	}
 	
 	public void setPosition (float x, float y) {
+	    //System.out.println(rect + " " + x);
 		rect.x = x;
 		rect.y = y;
 		circle.x = getCenterX();
@@ -71,15 +74,17 @@ public abstract class Entity {
 		if (active) update();
 
 		render(batch);
-		batch.end();
-		if (debug) {
-			sr.setProjectionMatrix(batch.getProjectionMatrix());
-			sr.begin(ShapeType.FilledCircle);
-			sr.setColor(1, 0, 0, .1f);
-			sr.filledCircle(circle.x, circle.y, circle.radius);
-			sr.end();
-		}
-		batch.begin();
+		
+		//if (debug) {
+		//    batch.end();
+		//	sr.setProjectionMatrix(batch.getProjectionMatrix());
+		//	sr.begin(ShapeType.FilledCircle);
+			//sr.setColor(1, 0, 0, .1f);
+			//sr.filledCircle(circle.x, circle.y, circle.radius);
+			//sr.end();
+			// batch.begin();
+		//}
+	
 		
 		
 
